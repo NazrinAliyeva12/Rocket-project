@@ -24,6 +24,26 @@
 	<header>
 		<div id="homeFullScreen">
 			<div class="header-text">
+				<ul class="nav">
+
+					@if (User.Identity.IsAuthenticated)
+					{
+						<li class="scroll-to-section"><a asp-action="logout" asp-controller="account">Log out</a></li>
+						<li class="scroll-to-section">
+							<a>
+								@User.Identity.Name
+							</a>
+						</li>
+					}
+
+					else
+					{
+						<li class="scroll-to-section"><a asp-action="register" asp-controller="account">Register</a></li>
+						<li class="scroll-to-section"><a asp-action="login" asp-controller="account">Login</a></li>
+
+					}
+
+				</ul>
 				<h1>Rocket internet</h1>
 				<div class="vertical-line"></div>
 				<p>

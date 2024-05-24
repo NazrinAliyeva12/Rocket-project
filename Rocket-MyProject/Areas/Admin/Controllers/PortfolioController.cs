@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rocket_MyProject.DAL;
 using Rocket_MyProject.Extentions;
@@ -7,6 +8,7 @@ using Rocket_MyProject.ViewModels.Portfolios;
 
 namespace Rocket_MyProject.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize]
 
 public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env) : Controller
 {
@@ -31,12 +33,12 @@ public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env
 		{
 			if (!data.Photo.IsValidType("image"))
 			{
-				ModelState.AddModelError("", "Faylin novu uygun deyil.");
+				ModelState.AddModelError("Photo", "Faylin novu uygun deyil.");
 				return View();
 			}
 			if (!data.Photo.IsValidLength(900))
 			{
-				ModelState.AddModelError("", "Fayin hecmi 900-den cox ola bilmez.");
+				ModelState.AddModelError("Photo", "Fayin hecmi 900-den cox ola bilmez.");
 				return View();
 			}
 		}
@@ -55,7 +57,7 @@ public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env
 
 		await _sql.Portfolies.AddAsync(port);
 		await _sql.SaveChangesAsync();
-		return RedirectToAction("Index");
+		return RedirectToAction(nameof(Index));
 
 	}
 
@@ -74,16 +76,18 @@ public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env
 	[HttpPost]
 	public async Task<IActionResult>Update(int? id, UpdateVM updateVM)
 	{
+
         if (id == null || id < 1) return BadRequest();
         Portfolio existed = await _sql.Portfolies.FirstOrDefaultAsync(p => p.Id == id);
         if (existed == null) return NotFound();
 
         existed.Image = updateVM.Image;
 		await _sql.SaveChangesAsync();
-		return View(nameof(Index));
+        return RedirectToAction(nameof(Index));
+
     }
 
-	public async Task<IActionResult>Delete(int? id)
+    public async Task<IActionResult>Delete(int? id)
 	{
         if (id == null) return BadRequest();
         var cat = await _sql.Portfolies.FindAsync(id);
@@ -93,8 +97,6 @@ public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env
         await _sql.SaveChangesAsync();
         return RedirectToAction("Index");
     }
-
-
 }
 
 

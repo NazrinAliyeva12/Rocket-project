@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Rocket_MyProject.DAL;
+using Rocket_MyProject.Models;
 
 namespace Rocket_MyProject
 {
@@ -12,6 +14,18 @@ namespace Rocket_MyProject
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<PortfolioContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+            builder.Services.AddIdentity<AppUser, IdentityRole>(p=>
+            {
+                p.User.RequireUniqueEmail = true;
+                p.Password.RequiredUniqueChars = 1;
+                p.Password.RequireNonAlphanumeric = false;
+                p.Password.RequireDigit = false;
+                p.Password.RequireLowercase = false;
+                p.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<PortfolioContext>()
+            .AddDefaultTokenProviders();
+            
+             
 
             var app = builder.Build();
 

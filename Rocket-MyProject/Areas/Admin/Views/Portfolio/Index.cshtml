@@ -8,8 +8,7 @@
 @model IEnumerable<GetPortfolioAdminVM>
 <div class="card-body p-4">
     <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
-    <button asc-action="Create" class="btn btn-success m-1 mb-2 1 float-end">Create</button>
-
+    <a class="btn btn-primary mb-2 float-end " asp-action="Create">Create</a>
     <div class="table-responsive  w-100">
         <table class="table text-nowrap mb-0 align-middle table-bordered">
             <thead class="text-dark fs-4">
@@ -39,7 +38,7 @@
                             <h6 class="fw-semibold mb-0">@data.Id</h6>
                         </th>
                         <td class="border-bottom-0">
-                            <img src="~/@data.Image" width="50" />
+                            <img src="~/imgs/prts/@data.Image" width="50" />
                         </td>
                         <th class="border-bottom-0">
                             <h6 class="fw-semibold mb-0">@data.UpdatedTime</h6>
