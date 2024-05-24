@@ -1,0 +1,20 @@
+﻿@using Rocket_MyProject.ViewModels.Portfolios
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model CreatePortfolioAdminVM
+<h5 class="card-title fw-semibold mb-4">Forms</h5>
+<div class="card">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label asp-for="Photo" class="form-label">Photo</label>
+                <input class="form-control">
+                <span class="text-danger" asp-validation-summary></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
