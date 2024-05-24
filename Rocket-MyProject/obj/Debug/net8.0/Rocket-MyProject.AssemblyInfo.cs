@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Rocket-MyProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79d4b8f41b754f3db9bf048101084cca82892bdd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Rocket-MyProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Rocket-MyProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

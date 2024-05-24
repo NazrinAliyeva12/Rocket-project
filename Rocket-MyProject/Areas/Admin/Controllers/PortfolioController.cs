@@ -23,6 +23,7 @@ public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env
 	{
 		return View();
 	}
+	[HttpPost]
 	public async Task<IActionResult> Create(CreatePortfolioAdminVM data)
 	{
 
@@ -70,6 +71,7 @@ public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env
         };
         return View(updateVM);
     }
+	[HttpPost]
 	public async Task<IActionResult>Update(int? id, UpdateVM updateVM)
 	{
         if (id == null || id < 1) return BadRequest();
@@ -83,14 +85,45 @@ public class PortfolioController(PortfolioContext _sql, IWebHostEnvironment _env
 
 	public async Task<IActionResult>Delete(int? id)
 	{
-        if (id == null || id < 1) return BadRequest();
-		var cat = await _sql.Portfolies.FindAsync(id);
-		if (cat == null) return NotFound();
-		System.IO.File.Delete(cat.Image);
-		_sql.Remove(cat);
-		await _sql.SaveChangesAsync();
-		return RedirectToAction("Index");
+        if (id == null) return BadRequest();
+        var cat = await _sql.Portfolies.FindAsync(id);
+        if (cat is null) return NotFound();
+        System.IO.File.Delete(Path.Combine(_env.WebRootPath, cat.Image));
+        _sql.Remove(cat);
+        await _sql.SaveChangesAsync();
+        return RedirectToAction("Index");
     }
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

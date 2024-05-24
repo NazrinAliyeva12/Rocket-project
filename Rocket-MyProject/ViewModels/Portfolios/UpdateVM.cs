@@ -2,7 +2,7 @@
 {
     public class UpdateVM
     {
-        public string Image;
+        public string Image { get; set; }
         
     }
 }

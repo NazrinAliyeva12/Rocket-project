@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model UpdateVM
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Image">Sekil</label>
+        <input asp-for="Image" accept="image/*" class="form-control">
+        <span asp-validation-for="Image"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+

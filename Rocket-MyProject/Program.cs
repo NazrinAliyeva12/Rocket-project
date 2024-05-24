@@ -25,9 +25,12 @@ namespace Rocket_MyProject
             app.UseRouting();
 
             app.UseAuthorization();
-			app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Portfolio}/{action=Index}/{id?}");
+            app.MapControllerRoute(
+            name: "areas",
+            pattern: "{area:exists}/{controller=portfolio}/{action=Index}/{id?}");
 
-			app.MapControllerRoute(
+
+            app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
